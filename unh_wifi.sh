@@ -1,7 +1,7 @@
 #!/bin/bash
 # Contribution of the President, Keith M. Hoodlet, 04.13.2016
 #
-# Written by the UNH Linux Club
+# Written by the UNH Linux Club... and Jake!
 check_reqs() {
 	# Make sure we're running Linux and not on a Mac
 	OS_NAME=`uname`
@@ -17,7 +17,15 @@ intro() {
 	echo "======================================"
 	echo "===== UNH Easy WiFi Setup Script ====="
 	echo "======================================"
-	echo ""
+	echo "NOTE: Before running, download and install"
+	echo "the user certificates from wifi.unh.edu (can"
+	echo "be accessed by connecting to UNH-Open first)."
+	echo "When you get to the cloudpath download link, "
+	echo "click \"Show all operating systems\", select "
+	echo "\"Other Operating Systems\", then download "
+	echo "as well as install the certificates from steps 1-3,"
+	echo "and run this for the remaining setup."
+
 
 	check_reqs
 	if [ ! $? -eq 1 ]
@@ -45,7 +53,7 @@ run_nmcli() {
 		fi
 	fi
 
-	echo "Creating UNH-Secure profile..."
+	echo "Creating eduroam profile..."
 	nmcli con add type wifi ifname $interface con-name eduroam ssid eduroam
 
 	# The main reason fro this script is to set up the options that would
@@ -112,7 +120,7 @@ get_info() {
 main() {
 	intro
 	echo "======================================"
-	echo "This script will attempt to automatically setup the WiFi connection"
+	echo "This script will attempt to automatically set up the WiFi connection"
 	echo "on your new Linux PC. You will need your UNH username and password."
 	echo
 
