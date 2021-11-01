@@ -46,14 +46,14 @@ run_nmcli() {
 	fi
 
 	echo "Creating UNH-Secure profile..."
-	nmcli con add type wifi ifname $interface con-name UNH-Secure ssid UNH-Secure
+	nmcli con add type wifi ifname $interface con-name eduroam ssid eduroam
 
 	# The main reason fro this script is to set up the options that would
 	# have to be set up manually, such as peap and disabling the certificate.
 	# I would like to have the certificate working, however, but that may
 	# be done at a later date.
-	echo "Editing UNH-Secure profile..."
-	nmcli con modify UNH-Secure \
+	echo "Editing eduroam profile..."
+	nmcli con modify eduroam \
 		802-1x.eap peap \
 		802-1x.identity $user \
 		802-1x.password $passw \
@@ -69,9 +69,9 @@ run_nmcli() {
 }
 
 check_if_already_registered() {
-	if [ -f /etc/NetworkManager/system-connections/UNH-Secure ]
+	if [ -f /etc/NetworkManager/system-connections/eduroam ]
 	then
-		echo "There is already a network named UNH-Secure registered with the system."
+		echo "There is already a network named eduroam registered with the system."
 		echo "Please forget it and then try again."
 
 		read -n 1 -p "Would you like us to remove it? [yn] " yn
@@ -79,7 +79,7 @@ check_if_already_registered() {
 
 		case $yn in
 			[Yy]* )
-				nmcli con delete UNH-Secure
+				nmcli con delete eduroam
 				echo
 				;;
 			[Nn]* )
@@ -114,7 +114,6 @@ main() {
 	echo "======================================"
 	echo "This script will attempt to automatically setup the WiFi connection"
 	echo "on your new Linux PC. You will need your UNH username and password."
-	echo "(same as Blackboard)."
 	echo
 
 	# We can assume they are using netowrk manager
@@ -123,7 +122,7 @@ main() {
 	run_nmcli
 
 	echo
-	echo "IMPORTANT: Restart your system, then try to connect to UNH-Secure via the wifi menu. Good luck."
+	echo "IMPORTANT: Restart your system, then try to connect to eduroam via the wifi menu. Good luck."
 }
 
 main

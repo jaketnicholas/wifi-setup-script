@@ -1,5 +1,6 @@
 # wifi-setup-script
-The UNH Linux Club Automatic Wi-Fi Setup Script
+The UNH Linux Club Automatic Wi-Fi Setup Script... modified by myself in order
+to work with the new secure network at UNH, eduroam!
 
 Usage
 =====
@@ -16,7 +17,12 @@ type:
 
     bash <(curl -s https://raw.githubusercontent.com/UNH-Linux-Club/wifi-setup-script/master/unh_wifi.sh)
 
-Authors
+Fork Author
+=======
+
+[Jake](mailto:jaketnicholas@gmail.com)
+
+Original Authors
 =======
 
 [Adam](mailto:aleblanc501@outlook.com)  
@@ -24,3 +30,4 @@ Authors
 [Ryan M](mailto:rm1085@wildcats.unh.edu)  
 [Jeremy](mailto:jp18@wildcats.unh.edu)  
 [Ethan](mailto:es2025@wildcats.unh.edu)  
+
