@@ -11,11 +11,33 @@ a) download it locally onto your machine; or
 
 b) bootstrap it
 
-If you want a super basic, out-of-the-box experience, simply hook yourself
-up with Ethernet or connect to UNH-Public, and then open up a terminal and
-type:
+In order for the script to work, you must download the certificates from
+wifi.unh.edu (should do over UNH-Open, a phone hotspot or a separate computer
+that you can transfer the files from).
 
-    bash <(curl -s https://raw.githubusercontent.com/UNH-Linux-Club/wifi-setup-script/master/unh_wifi.sh)
+Once you log in as a faculty/staff/student, it'll usually bring you to a page
+to download a Cloudpath executable for Linux. If this executable says the OS is
+"not supported for automatic configuration," well, that's what I wrote this
+script because of! Click the "Show all operating systems" link below the 
+Cloudpath download prompt, and select "Other Operating Systems." Now download
+the certificates from steps 2 and 3 (as .cer and .p12 files respectively, which
+should be their default when clicking on the buttons anyways). 
+
+Place both of those certificates in the folder where the unh_wifi.sh shell 
+script is located, then run it (NOTE: might need to run the command 
+'chmod +x unh_wifi.sh' while in the shell script's directory in order to make
+it runnable).
+
+The rest of the setup should be done automatically by the shell script once you
+enter your UNH username and password... it worked on my machine at least! 
+(I use Linux Mint 19.3 btw)
+
+If the script spits out an error or doesn't work, try downloading the cert from
+step 1 of the wifi.unh.edu certificate page instead of 2. I haven't personally
+tried that, but who knows, maybe it'll do the trick. Otherwise, feel free to
+contact me via email! I'll try to get back to you if I'm not busy with whatever
+job stuff I'll have on my plate come next year when I'm graduated.
+
 
 Fork Author
 =======

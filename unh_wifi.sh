@@ -23,8 +23,11 @@ intro() {
 	echo "When you get to the cloudpath download link, "
 	echo "click \"Show all operating systems\", select "
 	echo "\"Other Operating Systems\", then download "
-	echo "as well as install the certificates from steps 1-3,"
-	echo "and run this for the remaining setup."
+	echo "as well as install the certificates from step 2"
+	echo "and step 3 (should be a .cer and .p12 file)"
+	echo "respectively. Then, place both files in the same"
+	echo "folder as this shell script; This script should"
+	echo "handle the configuration from there."
 
 
 	check_reqs
@@ -56,18 +59,25 @@ run_nmcli() {
 	echo "Creating eduroam profile..."
 	nmcli con add type wifi ifname $interface con-name eduroam ssid eduroam
 
+	temp=$(/bin/pwd)
+	ca=$(find ${temp} -name '*.cer')
+	pk=$(find ${temp} -name '*.p12')
+
 	# The main reason fro this script is to set up the options that would
 	# have to be set up manually, such as peap and disabling the certificate.
 	# I would like to have the certificate working, however, but that may
 	# be done at a later date.
 	echo "Editing eduroam profile..."
 	nmcli con modify eduroam \
-		802-1x.eap peap \
-		802-1x.identity $user \
-		802-1x.password $passw \
-		802-1x.phase2-auth mschapv2 \
 		802-11-wireless-security.auth-alg open \
-		802-11-wireless-security.key-mgmt wpa-eap
+		802-11-wireless-security.key-mgmt wpa-eap \
+		802-1x.ca-cert "${ca}" \
+		802-1x.client-cert "${pk}" \
+		802-1x.domain-suffix-match clearpass.unh.edu \
+		802-1x.eap tls \
+		802-1x.identity $user \
+		802-1x.private-key "${pk}" \
+		802-1x.private-key-password $passw
 
 	if [ $? == 0 ]; then
 		echo "Done!"
